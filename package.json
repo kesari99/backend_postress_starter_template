@@ -1,10 +1,20 @@
 {
   "name": "my-backend",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev":"nodemon index.js"
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "nodemon index.ts",
+    "worker": "ts-node start-worker.ts",
+    "start:worker": "node dist/start-worker.js",
+    "migrate": "sequelize-cli db:migrate",
+    "migrate:undo": "sequelize-cli db:migrate:undo",
+    "migrate:status": "sequelize-cli db:migrate:status",
+    "migrate:create": "sequelize-cli migration:generate --name",
+    "migrate:generate": "node scripts/generate-migrations.js",
+    "migrate:push": "node scripts/migrate.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
@@ -20,5 +30,14 @@
     "pg-hstore": "^2.3.4",
     "sequelize": "^6.37.7",
     "sequelize-cli": "^6.6.3"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.5",
+    "@types/node": "^24.10.1",
+    "@types/nodemailer": "^7.0.4",
+    "@types/pg": "^8.15.6",
+    "@types/sequelize": "^6.12.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
   }
 }
